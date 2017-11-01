@@ -57,6 +57,17 @@ header {
   border-bottom-right-radius: 4px;
 }
 
+#bodyContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 textarea {
-  width: 50%;
+  resize: none;
+  border-top: none;
+  border-color: grey;
+}
+
+iframe {
+  border: none;
 }
