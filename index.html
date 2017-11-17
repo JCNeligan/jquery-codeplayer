@@ -20,25 +20,40 @@
       <div class="toggleButton" id="output">Output</div>
     </div>
   </header>
-  <div id="bodyContainer">
-    <textarea id="html-panel" class="panel">Hello World!</textarea>
+  <main id="bodyContainer">
+    <textarea id="html-panel" class="panel hidden">Hello World!</p></textarea>
+    <textarea id="css-panel" class="panel hidden">p {color:green;}</textarea>
+    <textarea id="javascript-panel" class="panel hidden">alert("Hi There");</textarea>
 
-    <iframe id="output-panel" class="panel"></iframe>
-  </div>
+    <iframe id="output-panel" class="panel hidden"></iframe>
+  </main>
 
   <script>
+
+    function updateOutput() {
+      $("iframe").contents().find("html").html("<html><head><style type='text/css'>" + $("#css-panel").val() + "</style></head><body>" + $("#html-panel").val() + "</body></html>"
+      );
+
+      document.getElementById("output-panel").contentWindow.eval($("#javascript-panel").val())
+    }
+
     $(".toggleButton").click(function () {
       $(this).toggleClass("active");
+
+      var panelId = $(this).attr("id") + "-panel"
+      $("#" + panelId).toggleClass("hidden");
     });
 
     $(".panel").height($(window).height() - $("header").height() - 18);
 
     $(".panel").width($(window).width() / 2);
 
-    $("iframe").contents().find("html").html($("#html-panel").val());
+    $(document).ready(function () {
+      updateOutput();
+    });
 
-    $("textarea").on('change keyup paste', function () {
-      $("iframe").contents().find("html").html($("#html-panel").val());
+    $("textarea").on("change keyup paste", function () {
+      updateOutput();
     });
   </script>
 </body>

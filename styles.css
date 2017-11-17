@@ -57,7 +57,7 @@ header {
   border-bottom-right-radius: 4px;
 }
 
-#bodyContainer {
+main {
   display: flex;
   flex-direction: row;
 }
@@ -70,4 +70,12 @@ textarea {
 
 iframe {
   border: none;
+}
+
+.panel {
+  border-left: none;
+}
+
+.hidden {
+  display: none;
 }
